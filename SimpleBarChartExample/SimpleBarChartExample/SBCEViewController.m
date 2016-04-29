@@ -20,26 +20,34 @@
 {
 	[super loadView];
 
-	_values							= @[@30, @45, @44, @60, @95, @2, @8, @9];
-	_barColors						= @[[UIColor blueColor], [UIColor redColor], [UIColor blackColor], [UIColor orangeColor], [UIColor purpleColor], [UIColor greenColor]];
+	_values							= @[@2, @4, @6, @8, @10, @12, @14, @16];
+    
+    
+	_barColors						= @[ [UIColor orangeColor]];
+    
+    
+    
 	_currentBarColor				= 0;
 
 	CGRect chartFrame				= CGRectMake(0.0,
 												 0.0,
 												 300.0,
 												 300.0);
+    
+    
+    
 	_chart							= [[SimpleBarChart alloc] initWithFrame:chartFrame];
 	_chart.center					= CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0);
 	_chart.delegate					= self;
 	_chart.dataSource				= self;
 	_chart.barShadowOffset			= CGSizeMake(2.0, 1.0);
-	_chart.animationDuration		= 1.0;
+	_chart.animationDuration		= .5;
 	_chart.barShadowColor			= [UIColor grayColor];
 	_chart.barShadowAlpha			= 0.5;
 	_chart.barShadowRadius			= 1.0;
 	_chart.barWidth					= 18.0;
 	_chart.xLabelType				= SimpleBarChartXLabelTypeVerticle;
-	_chart.incrementValue			= 10;
+	_chart.incrementValue			= 4;//y坐标轴间隔
 	_chart.barTextType				= SimpleBarChartBarTextTypeTop;
 	_chart.barTextColor				= [UIColor whiteColor];
 	_chart.gridColor				= [UIColor grayColor];
@@ -61,15 +69,20 @@
 - (void)changeClicked
 {
 	NSMutableArray *valuesCopy = _values.mutableCopy;
-	[valuesCopy shuffle];
+	//[valuesCopy shuffle];
 
 	_values = valuesCopy;
 
-	if (_chart.xLabelType == SimpleBarChartXLabelTypeVerticle)
-		_chart.xLabelType = SimpleBarChartXLabelTypeHorizontal;
-	else
-		_chart.xLabelType = SimpleBarChartXLabelTypeVerticle;
+     _chart.xLabelType = SimpleBarChartXLabelTypeHorizontal;
 
+	if (_chart.xLabelType == SimpleBarChartXLabelTypeVerticle)
+    {
+       // _chart.xLabelType = SimpleBarChartXLabelTypeHorizontal;
+    }
+	else
+    {
+		//_chart.xLabelType = SimpleBarChartXLabelTypeVerticle;//垂直
+    }
 	_currentBarColor = ++_currentBarColor % _barColors.count;
 
 	[_chart reloadData];
