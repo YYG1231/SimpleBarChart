@@ -20,6 +20,11 @@
 {
 	[super loadView];
 
+    
+    /*
+     *
+     */
+
 	_values							= @[@2, @4, @6, @8, @10, @12, @14, @16];
     
     
@@ -34,7 +39,9 @@
 												 300.0,
 												 300.0);
     
-    
+    /*
+     *创建chart
+     */
     
 	_chart							= [[SimpleBarChart alloc] initWithFrame:chartFrame];
 	_chart.center					= CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0);
@@ -50,10 +57,13 @@
 	_chart.incrementValue			= 4;//y坐标轴间隔
 	_chart.barTextType				= SimpleBarChartBarTextTypeTop;
 	_chart.barTextColor				= [UIColor whiteColor];
-	_chart.gridColor				= [UIColor grayColor];
+	_chart.gridColor				= [UIColor lightGrayColor];
 
 	[self.view addSubview:_chart];
 
+    
+    
+    
 	UIButton *changeButton			= [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	changeButton.frame				= CGRectMake(0.0,
 												 _chart.frame.origin.y + _chart.frame.size.height + 20.0,
